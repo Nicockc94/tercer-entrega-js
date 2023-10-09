@@ -22,25 +22,37 @@ let submit = document.getElementById("submit");
 let listaPacientes=[]
 
 
-
-const mostrarPaciente = () =>{
-
-}
-
 //envio de formulario
 submit.addEventListener("click",crearFormulario);
-const nuevoPaciente=(paciente) => {
-  
-    listaPacientes.push(paciente)
-    console.log(listaPacientes)
-    //storage              //key       //valor
 
-   localStorage.setItem("Pacientes",JSON.stringify(listaPacientes))
+// notificaciones 
+function eliminastePaciente(){
+   Toastify({
 
+      text:"Has Eliminado el Paciente",
+      gravity:`bottom`,
+      position:"right",
+      duration: 3000,
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      
+      }).showToast();
+   
 }
+function notificacionNuevoPaciente() {
+   Toastify({
+
+      text: "Agregaste Nuevo Paciente",
+      gravity: `bottom`,
+      position: "right",
+      duration: 3000,
+      
+      }).showToast();
+}
+
 
 //creacion del formulario
  function crearFormulario(e){
+  
     //entrada de datos
     let nombreCompleto = document.getElementById("nombreCompleto").value;
     let dni = document.getElementById("dni").value;
@@ -54,7 +66,6 @@ const nuevoPaciente=(paciente) => {
     let alergias = document.getElementById("alergias").value;
     let observaciones = document.getElementById("observaciones").value;
    
-
     e.preventDefault()
 
     let paciente = {
@@ -74,9 +85,17 @@ const nuevoPaciente=(paciente) => {
      }
     //llamado a la funcion que crea un un nuevo paciente
     nuevoPaciente(paciente)
+    notificacionNuevoPaciente()
+   
  }
 
-
+ const nuevoPaciente = (paciente) => {
+  
+   listaPacientes.push(paciente)
+   console.log (listaPacientes)
+   //storage              //key       //valor
+  localStorage.setItem("Pacientes",JSON.stringify (listaPacientes))
+}
 
 
 
@@ -92,13 +111,15 @@ const nuevoPaciente=(paciente) => {
  function busquedaDePacientes () {
   
     let pacientes = JSON.parse(localStorage.getItem("Pacientes"))
-      //VACIAR HTML
-    let  obser=document.getElementById("obser")
+    let  obser=document.getElementById("obser") 
+    //VACIAR HTML
+    
       dataIngresada.innerHTML =""
       
       for (let index = 0; index < pacientes.length; index++) {     
        let nombre = pacienteaBuscar.value
       if (pacientes[index].nombreCompleto === nombre) {
+         
          
          obser.innerHTML=`
                                        <h2>Observaciones</h2>
@@ -113,31 +134,32 @@ const nuevoPaciente=(paciente) => {
                                    </tr> 
 
                                    `
+     
    EliminarPaciente.addEventListener("click",quitarDeLista)
+
+
+
    function quitarDeLista () {
+
       let pacientes = JSON.parse(localStorage.getItem("Pacientes"))
-      console.log(pacientes)
-      pacientes.splice(index)
-      localStorage.setItem("Pacientes",JSON.stringify(pacientes))
       
-    
+      listaPacientes.splice(index,1)
+      listaPacientes[index].nombre
+      localStorage.setItem("Pacientes",JSON.stringify(listaPacientes))
       dataIngresada.innerHTML =""
       obser.innerHTML=""
 
-
+      eliminastePaciente()
    }     
        //  console.log(pacientes[index])
                      
        }else {  
 
-     //  console.log(pacientes[index])
+      
       
    }
    }
    }
-
-
-   
 
 
    //boton que muestra La lista actual de pacientes 
@@ -145,35 +167,49 @@ const nuevoPaciente=(paciente) => {
    // id que mostrara la informacion 
   let listaDePasientes = document.getElementById("listaDePasientes")
 
-  
    mostrarLista.addEventListener("click",mostrarListaDePacientes)
 
-//funcion 
+//funcion que muestra la lista de pacientes
 
    function mostrarListaDePacientes() { 
+
       let pacientes = JSON.parse(localStorage.getItem("Pacientes"))
+      pacientes = listaPacientes
+
+      // vaciar la lista de pacientes 
       listaDePacientes.innerHTML = ""; 
      
-  for (let index = 0; index < pacientes.length; index++) {
-   listaDePacientes.innerHTML += 
-                              `
+         for (let index = 0; index < pacientes.length; index++) {
+         listaDePacientes.innerHTML += 
+                                             `
                                 <li>${pacientes[index].nombreCompleto}</li>
                                 
+                                              `                                                
+          }
 
-                                                    `                                                
-  }
-
-}
+   }
 
 ocultar.addEventListener("click",guardarLista)
 
 function guardarLista(){
-  return listaDePacientes.innerHTML = ""
+   pacientes = listaPacientes
+   
+  return listaDePacientes.innerHTML = "";
+
 
 }
-
 let pacientes = JSON.parse(localStorage.getItem("Pacientes"))
-//llamado a elementos de DOM 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+   let pacientes = JSON.parse(localStorage.getItem("Pacientes"));
+   if (pacientes) {
+     listaPacientes = pacientes;
+     // También puedes volver a cargar la lista de pacientes en la página al cargar
+     mostrarListaDePacientes();
+   }
+ });
+
 
 
 
