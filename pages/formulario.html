@@ -6,15 +6,71 @@
     <link rel="stylesheet" href="../css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <title>Agenda Odontologia</title>
+    <title> Agenda Odontologia </title>
 </head>
 <header>
     <h1>Agenda de pacientes</h1>
     <button><a href="/index.html">Salir</a></button>
+    <div class="nav-container">
+    <nav class="work-nav">
+      <p><button id="btn-ingresoPacientes" class="btn-nav">Ingresar Paciente</button></p>
+      <p><button id="btn-busquedaPacientes" class="btn-nav">Buscar Paciente</button></p>
+    </nav>
+    </div>
 </header>
 <body>
+    <div class="tutorial">
+   <h2>Bienvenidos, este es un Sistema de almacenamiento de datos de pacientes odontologicos</h2>
+   <p> Para ingresar un paciente haga click en "Ingresar Paciente"</p>
+   <p> Cuando quiere obtener la informacion del paciente guardado haga click en "Buscar paciente"</p>
+   <p> tambien podes acceder a la lista de pacientes a travez de los botones de lista de pacientes</p>
+  </div>
+  <div>
+    <button id ="mostrarLista">Mostrar Lista de Pacientes</button>
+    <button id ="ocultar">Ocultar Lista</button>
+
+    <ul id="listaDePacientes"> 
+
+    </ul>
   
-    <div class="formulario" method="post" id="Formulario">
+  
+    <div class="Busquedaoff" id="busqueda" >
+    <h3>Busqueda de Pacientes</h3>
+    <input type="text"  placeholder="Ingrese Nombre de Paciente" id="buscaPacientes">
+    <button  id="buscarPacientes">Buscar</button>
+    <button id="boton-cerrar-busqueda" class="boton-cerrar-busqueda" >cerrar</button>
+    </div> 
+   
+    </div>
+    <div id="obser">
+      <h2></h2>
+      <p></p>
+    </div> 
+    
+    
+    <table id="tabla" class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Nombre y Apellido</th>
+          <th scope="col">DNI</th>
+          <th scope="col">Nac.</th>
+          <th scope="col">Proxima Vist.</th>
+        </tr>
+      </thead>
+
+      <tbody id="dataIngresada">
+
+        <tr>
+          <th ></th>
+          <td ></td>
+          <td ></td>
+          <td ></td>
+        </tr>
+         
+
+    
+  
+    <div class="formulariooff" method="post" id="Formulario">
         <label for="nombre">Nombre y Apellido ::</label>
         <input type="text" id="nombreCompleto" name="nombreCompleto" required><br><br>
     
@@ -23,16 +79,20 @@
     
         <label for="direccion">Dirección:</label>
         <input type="text" id="direccion" name="direccion"><br><br>
+
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="direccion"><br><br>
+
+        <label for="telefono">Telefono:</label>
+        <input type="text" id="telefono" name="direccion"><br><br>
+
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fecha_ultima_consulta"><br><br>
     
         <label for="fecha_ingreso">Fecha de Ingreso:</label>
         <input type="date" id="fechaIngreso" name="fecha_ingreso" required><br><br>
     
-        <label for="fecha_ultima_consulta">Fecha de la Última Consulta:</label>
-        <input type="date" id="fechaUltimaConsulta" name="fecha_ultima_consulta"><br><br>
-    
-        <label for="control_cepillado">Control de Cepillado:</label>
-        <input type="text" id="controlDeCepillado" name="apellido" required><br><br>
-    
+        
         <label for="elementos_higiene">Elementos para Higiene Dental:</label>
         <input type="text" id="elementosHigiene" name="elementos_higiene"><br><br>
     
@@ -49,49 +109,16 @@
         <textarea id="observaciones" name="observaciones" rows="4" cols="50"></textarea><br><br>
     
         <input type="submit" id="submit" value="Enviar">
+          <div id="spinner" class="spinnerOff"></div>
+          <div class="close-container">
+          <button id="cerrar" class="btn-nav"> cerrar </button>
+          </div> 
+     
     </div>
-   
+    
+    
 
-    <div>
-        <button id ="mostrarLista">Mostrar Lista de Pacientes</button>
-        <button id ="ocultar">Ocultar Lista</button>
-
-        <ul id="listaDePacientes">
-           
-          
-        </ul>
-        
-        
-
-    </div>
-
-            <div class="Busqueda" >
-            <h3>Busqueda de Pacientes</h3>
-            <input type="text"  placeholder="Ingrese Nombre de Paciente" id="buscaPacientes">
-            <button id="buscarPacientes">Buscar</button>
-            </div>    
-
-            <table id="tabla" class="table table-dark">
-                <thead>
-                  <tr>
-                    <th scope="col">Nombre y Apellido</th>
-                    <th scope="col">DNI</th>
-                    <th scope="col">Ultima Vist.</th>
-                    <th scope="col">Proxima Vist.</th>
-                  </tr>
-                </thead>
-                <tbody id="dataIngresada">
-
-                  <tr>
-                    <th ></th>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
-                  </tr>
-                  <div id="obser" class="obser">
-                      <h2></h2>
-                            <p></p>
-                    </div>
+         
   
                 </tbody>
               </table>

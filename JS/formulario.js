@@ -2,18 +2,55 @@
 
 let nombreCompleto = document.getElementById("nombreCompleto");
 let dni = document.getElementById("dni");
-let direccion = document.getElementById("direccion");
 let fechaIngreso =document.getElementById("fechaIngreso");
-let fechaUltimaConsulta = document.getElementById("fechaUltimaConsulta");
-let controlDeCepillado = document.getElementById("controlDeCepillado");
+let direccion = document.getElementById("direccion");
+let email = document.getElementById("email");
+let telefono = document.getElementById("telefono");
+let fechaNacimiento = document.getElementById("fechaNacimiento");
 let elementosHigiene = document.getElementById("elementosHigiene");
 let antecedentesSalud = document.getElementById("antecedentesSalud");
 let medicacion = document.getElementById("medicacion");
 let alergias = document.getElementById("alergias");
 let observaciones = document.getElementById("observaciones");
-let formulario = document.getElementById("formulario")
+let formulario = document.getElementById("Formulario")
 let submit = document.getElementById("submit");
+let spinner = document.getElementById("spinner");
+let busqueda = document.getElementById("busqueda");
+let bton_ingresoPacientes = document.getElementById("btn-ingresoPacientes");
+let bton_busquedaPacientes =document.getElementById("btn-busquedaPacientes");
+let bton_cerrarFormulario = document.getElementById("cerrar")
+let bton_cerrarBusqueda = document.getElementById("boton-cerrar-busqueda");
+/*  Botones en HTML  */
 
+
+bton_ingresoPacientes.addEventListener("click",mostrarFormulario)
+bton_busquedaPacientes.addEventListener("click",mostrarBusqueda)
+bton_cerrarFormulario.addEventListener("click",cierraFormulario)
+bton_cerrarBusqueda.addEventListener("click", cerrarBusqueda)
+
+
+// funcion que cierra la Busqueda
+
+function cerrarBusqueda () {
+   busqueda.className="Busquedaoff"
+   obser.className="MostrarObservacionesoff"
+
+}
+
+// funcion de boton que Cierra el formulario
+function cierraFormulario (){
+   formulario.className="formulariooff";
+
+}
+//  funcion de boton que muestra el formulario
+function mostrarFormulario(){
+   formulario.className="formulario";
+}
+//funcion de mostrar busqueda de paciente
+function mostrarBusqueda (){
+   busqueda.className="Busqueda";
+
+}
 
 
 
@@ -25,7 +62,7 @@ let listaPacientes=[]
 //envio de formulario
 submit.addEventListener("click",crearFormulario);
 
-// notificaciones 
+//     ----   ----         Notificaciones de Toastify             ----   ----    //
 function eliminastePaciente(){
    Toastify({
 
@@ -34,10 +71,10 @@ function eliminastePaciente(){
       position:"right",
       duration: 3000,
       background: "linear-gradient(to right, #00b09b, #96c93d)",
-      
       }).showToast();
    
 }
+
 function notificacionNuevoPaciente() {
    Toastify({
 
@@ -50,21 +87,26 @@ function notificacionNuevoPaciente() {
 }
 
 
-//creacion del formulario
+
+
+//     ----   ----         -------------- -- --------           ----   ----    //
+
+//funcion que crea el formulario
  function crearFormulario(e){
   
-    //entrada de datos
+    //entrada de Valores 
     let nombreCompleto = document.getElementById("nombreCompleto").value;
     let dni = document.getElementById("dni").value;
     let direccion = document.getElementById("direccion").value;
     let fechaIngreso =document.getElementById("fechaIngreso").value;
-    let fechaUltimaConsulta = document.getElementById("fechaUltimaConsulta").value;
-    let controlDeCepillado = document.getElementById("controlDeCepillado").value;
+    let fechaNacimiento = document.getElementById("fechaNacimiento").value;
     let elementosHigiene = document.getElementById("elementosHigiene").value;
     let antecedentesSalud = document.getElementById("antecedentesSalud").value;
     let medicacion = document.getElementById("medicacion").value;
     let alergias = document.getElementById("alergias").value;
     let observaciones = document.getElementById("observaciones").value;
+    let email = document.getElementById("email").value;
+    let telefono = document.getElementById("telefono").value;
    
     e.preventDefault()
 
@@ -74,30 +116,58 @@ function notificacionNuevoPaciente() {
         direccion:direccion,
         //fechas =======> revisar documentacion para implementar datos tipo fechas
         fechaIngreso:fechaIngreso,
-        fechaUltimaConsulta:fechaUltimaConsulta,
+        fechaNacimiento:fechaNacimiento,
         ////fechas =======> revisar documentacion para implementar datos tipo fechas
-        controlDeCepillado:controlDeCepillado ,
         elementosHigiene:elementosHigiene,
         antecedentesSalud:antecedentesSalud,
         medicacion:medicacion ,
         alergias:alergias,
         observaciones:observaciones ,
+        email:email,
+        telefono:telefono,
      }
-    //llamado a la funcion que crea un un nuevo paciente
-    nuevoPaciente(paciente)
-    notificacionNuevoPaciente()
-   
+//llamado a la funcion que crea un un nuevo paciente
+nuevoPaciente(paciente)
+
+setTimeout (reset,2000);
+setTimeout (notificacionNuevoPaciente,2000)
+spinnerOn ()   
  }
 
- const nuevoPaciente = (paciente) => {
-  
-   listaPacientes.push(paciente)
-   console.log (listaPacientes)
-   //storage              //key       //valor
-  localStorage.setItem("Pacientes",JSON.stringify (listaPacientes))
+// funcion que vacia el formulario despues de guardar los datos en storage
+function reset () {
+nombreCompleto.value = "";
+dni.value = "";
+direccion.value = "";
+fechaIngreso.value = "";
+fechaNacimiento.value = "";
+elementosHigiene.value = "";
+antecedentesSalud.value = "";
+medicacion.value = "";
+alergias.value = "";
+observaciones.value = "";
+telefono.value="";
+email.value ="";
+
 }
 
+// funcion de el icono de carga
+function spinnerOn (){
+   spinner.className="spinnerOn"
+   setTimeout(spinnerOff,2000);  
+}
 
+function spinnerOff (){
+   spinner.className="spinnerOff"
+}
+
+ 
+ const nuevoPaciente = (paciente) => {
+   listaPacientes.push(paciente)
+   console.log (listaPacientes)
+   localStorage.setItem("Pacientes",JSON.stringify (listaPacientes))
+
+}
 
   // busqueda de pacientes mediante input 
  let buscaPaciente = document.getElementById("buscarPacientes")
@@ -106,60 +176,66 @@ function notificacionNuevoPaciente() {
    
   
   buscaPaciente.addEventListener("click",busquedaDePacientes)
- //funcion que busca pacientes por nombre!
- 
+
+
+
+  //funcion que busca pacientes por nombre!
  function busquedaDePacientes () {
   
     let pacientes = JSON.parse(localStorage.getItem("Pacientes"))
-    let  obser=document.getElementById("obser") 
-    //VACIAR HTML
-    
+    let obser=document.getElementById("obser") 
+       //VACIAR HTML
       dataIngresada.innerHTML =""
       
       for (let index = 0; index < pacientes.length; index++) {     
        let nombre = pacienteaBuscar.value
       if (pacientes[index].nombreCompleto === nombre) {
          
-         
-         obser.innerHTML=`
-                                       <h2>Observaciones</h2>
-                                   <p>${pacientes[index].observaciones}</p>`
+         obser.className="MostrarObservaciones"
+         obser.innerHTML=`              <h2>Datos de Paciente</h2> 
+                         <p><span class="key">Alergias: </span>${pacientes[index].alergias}</p>
+                         <p> <span class="key">Direccion: </span>${pacientes[index].direccion}</p> 
+                         <p> <span class="key">Telefono: </span> ${pacientes[index].telefono}</p>
+                         <p> <span class="key" >Email: </span> ${pacientes[index].email}</p> 
+                                        <h2>Antecedentes de Salud</h2>
+                                <p>${pacientes[index].antecedentesSalud}</p>
+                                 <h2>Observaciones Generales</h2>
+                                <p>${pacientes[index].observaciones}</p>
+                                       `
+                                 
 
          dataIngresada.innerHTML =`<tr>
                                     <th>${pacientes[index].nombreCompleto}</th>
                                     <td>${pacientes[index].dni}</td>
-                                    <td>${pacientes[index].fechaIngreso}</td>
-                                    <td>${pacientes[index].fechaUltimaConsulta}</td>
+                                    <td>${pacientes[index].fechaNacimiento}</td>
+                                    <td>${pacientes[index].telefono}</td>
                                     <button id ="EliminarPaciente">Eliminar De Lista</button>
                                    </tr> 
 
                                    `
+
+                                     
      
    EliminarPaciente.addEventListener("click",quitarDeLista)
-
-
 
    function quitarDeLista () {
 
       let pacientes = JSON.parse(localStorage.getItem("Pacientes"))
-      
       listaPacientes.splice(index,1)
-      listaPacientes[index].nombre
       localStorage.setItem("Pacientes",JSON.stringify(listaPacientes))
       dataIngresada.innerHTML =""
       obser.innerHTML=""
 
       eliminastePaciente()
+      mostrarListaDePacientes()
    }     
-       //  console.log(pacientes[index])
                      
-       }else {  
-
+       }else{ 
+             
+         
+     
       
-      
-   }
-   }
-   }
+   }}}
 
 
    //boton que muestra La lista actual de pacientes 
@@ -170,8 +246,13 @@ function notificacionNuevoPaciente() {
    mostrarLista.addEventListener("click",mostrarListaDePacientes)
 
 //funcion que muestra la lista de pacientes
+  // Atravez de la api JsonPaseholder , obtengo imagenes de usuarios 
+
+
 
    function mostrarListaDePacientes() { 
+
+      // Atravez de la aPi JsonPaseholder , obtengo imagenes de usuarios
 
       let pacientes = JSON.parse(localStorage.getItem("Pacientes"))
       pacientes = listaPacientes
@@ -179,14 +260,38 @@ function notificacionNuevoPaciente() {
       // vaciar la lista de pacientes 
       listaDePacientes.innerHTML = ""; 
      
-         for (let index = 0; index < pacientes.length; index++) {
-         listaDePacientes.innerHTML += 
-                                             `
-                                <li>${pacientes[index].nombreCompleto}</li>
-                                
-                                              `                                                
-          }
+     for (let index = 0; index < pacientes.length; index++) {
 
+         let urlBase ='https://jsonplaceholder.typicode.com'
+         let fotos ='photos'
+                                                       
+         fetch (`${urlBase}/${fotos}/${index + 1}`)
+         .then(response => response.json())
+         .then(data =>{
+         let imageUrl = data.url
+
+            // creo un elemento en html
+         let imgElement = document.createElement('img')
+         imgElement.src = imageUrl;
+         imgElement.className="imagen-profile"
+
+         let listItem = document.createElement("li");
+         listItem.className ="listaProfile"
+         listItem.innerHTML = `${pacientes[index].nombreCompleto}`;
+         listItem.appendChild(imgElement);
+
+         listaDePacientes.appendChild(listItem);
+         
+            
+            })
+
+
+            .catch(error => {
+            console.error('Error al cargar la imagen: ', error);
+            });  
+                                                              
+          }
+       
    }
 
 ocultar.addEventListener("click",guardarLista)
@@ -210,6 +315,19 @@ document.addEventListener("DOMContentLoaded", () => {
    }
  });
 
+
+
+
+
+
+
+
+      
+
+
+
+
+      
 
 
 
