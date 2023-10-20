@@ -13,19 +13,59 @@
 
 <body>
     <main class="login">
-    <p>Usuario <input type="usuario" placeholder="Nombre de usuario o Email"></p>
-    <p>contraseña <input type="password"></p>
-    <button><a href="/pages/formulario.html">Ingresar</a> </button>
-    <P>en caso de que no tengas una cuenta activa crea un usuario haciendo click aqui</P>
-    <button><a href="">crear usuario</a></button>
+    <div id="login-container" class="mostrar__login-container">
+        <p>Usuario<input id="userid" type="email" placeholder="Nombre de usuario o Email"></p>
+        <p>contraseña <input id ="Userpassword "type="password"></p>
+        <button id ="verificar">Verificar</a> </button>
+        <P>en caso de que no tengas una cuenta activa crea un usuario haciendo click aqui</P>
+        <button id ="btn-createUser"><a href="">crear usuario</a></button>
+    </div>
 
-  
+    <button id ="ingresoUsuario"><a href="/pages/formulario.html"></a> Ingresar</button>
+
+
+
+
+    <div id="formulario-createUser" class="ocultar-createUser">
+        <form id="formulario">
+            <h2>Formulario de Registro</h2>
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name">
+                <div class="error-message" id="nameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="text" id="email" name="email">
+                <div class="error-message" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password">
+                <div class="error-message" id="passwordError"></div>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+
+    </div>
+    
     
     </main>
 
     <div id="comentarios">
        
     </div>
-   <script type="module" src="/JS/index.js"></script>
+
+ 
+  
 </body>
+<!--IMPORT FIREBASE--->
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<!--IMPORT SCRIPTS--->
+<script type="module" src="/JS/index.js"></script>
+<script type="module" src="/JS/firebase.js"></script>
+
+
 </html>
