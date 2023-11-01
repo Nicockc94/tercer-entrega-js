@@ -1,5 +1,7 @@
 // llamado a los ID del html  : 
 
+
+
 let nombreCompleto = document.getElementById("nombreCompleto");
 let dni = document.getElementById("dni");
 let fechaIngreso =document.getElementById("fechaIngreso");
@@ -34,31 +36,27 @@ bton_cerrarBusqueda.addEventListener("click", cerrarBusqueda)
 /*  Botones en HTML  */
 
 // funcion que cierra la Busqueda
-
 function cerrarBusqueda () {
    busqueda.className="Busquedaoff"
    obser.className="MostrarObservacionesoff"
 
 }
-
 // funcion de boton que Cierra el formulario
 function cierraFormulario (){
    formulario.className="formulariooff";
 
 }
-//  funcion de boton que muestra el formulario
+// funcion  que muestra el formulario
 function mostrarFormulario(){
    busqueda.className="Busquedaoff"
    formulario.className="formulario";
 }
-//funcion de mostrar busqueda de paciente
+// funcion de mostrar busqueda de paciente
 function mostrarBusqueda (){
    busqueda.className="Busqueda";
    formulario.className="formulariooff";
 
 }
-
-
 
 //variable global / array de lista de pacientes
 let listaPacientes=[]
@@ -67,8 +65,7 @@ let listaPacientes=[]
 //envio de formulario
 submit.addEventListener("click",crearFormulario);
 
-
-//     ----   ----         Notificaciones de Toastify             ----   ----    //
+//     ----   ----         Notificaciones de Toastify                  ----   ----    //
 function eliminastePaciente(){
    Toastify({
 
@@ -80,7 +77,7 @@ function eliminastePaciente(){
       }).showToast();
    
 }
-//     ----   ----         Notificaciones de Toastify             ----   ----    //
+//     ----   ----                                                     ----   ----    //
 function notificacionNuevoPaciente() {
    Toastify({
 
@@ -91,11 +88,9 @@ function notificacionNuevoPaciente() {
       
       }).showToast();
 }
+//     ----   ----         Notificaciones de Toastify                  ----   ----    //
 
 
-
-
-//     ----   ----         -------------- -- --------           ----   ----    //
 
 //funcion que crea el formulario
  function crearFormulario(e){
@@ -167,7 +162,7 @@ function spinnerOff (){
    spinner.className="spinnerOff"
 }
 
- 
+
  const nuevoPaciente = (paciente) => {
    listaPacientes.push(paciente)
    console.log (listaPacientes)
@@ -175,7 +170,7 @@ function spinnerOff (){
 
 }
 
-  // busqueda de pacientes mediante input 
+  // busqueda de pacientes mediante input // referencias a los ID del HTML
  let buscaPaciente = document.getElementById("buscarPacientes")
  let pacienteaBuscar = document.getElementById("buscaPacientes")
  let ocultar = document.getElementById("ocultar")
@@ -238,7 +233,9 @@ function spinnerOff (){
                      
        }else{ 
              
-         
+         swal({
+            text: "No se encontro un Paciente con ese Nombre",
+          });
      
       
    }}}
