@@ -1,4 +1,4 @@
-// llamado a los ID del html 
+// llamado a los ID del html  : 
 
 let nombreCompleto = document.getElementById("nombreCompleto");
 let dni = document.getElementById("dni");
@@ -16,11 +16,14 @@ let formulario = document.getElementById("Formulario")
 let submit = document.getElementById("submit");
 let spinner = document.getElementById("spinner");
 let busqueda = document.getElementById("busqueda");
+
+
+/* Botones */
 let bton_ingresoPacientes = document.getElementById("btn-ingresoPacientes");
 let bton_busquedaPacientes =document.getElementById("btn-busquedaPacientes");
 let bton_cerrarFormulario = document.getElementById("cerrar")
 let bton_cerrarBusqueda = document.getElementById("boton-cerrar-busqueda");
-/*  Botones en HTML  */
+
 
 
 bton_ingresoPacientes.addEventListener("click",mostrarFormulario)
@@ -28,6 +31,7 @@ bton_busquedaPacientes.addEventListener("click",mostrarBusqueda)
 bton_cerrarFormulario.addEventListener("click",cierraFormulario)
 bton_cerrarBusqueda.addEventListener("click", cerrarBusqueda)
 
+/*  Botones en HTML  */
 
 // funcion que cierra la Busqueda
 
@@ -44,23 +48,25 @@ function cierraFormulario (){
 }
 //  funcion de boton que muestra el formulario
 function mostrarFormulario(){
+   busqueda.className="Busquedaoff"
    formulario.className="formulario";
 }
 //funcion de mostrar busqueda de paciente
 function mostrarBusqueda (){
    busqueda.className="Busqueda";
+   formulario.className="formulariooff";
 
 }
 
 
 
-//variable global
-
+//variable global / array de lista de pacientes
 let listaPacientes=[]
 
 
 //envio de formulario
 submit.addEventListener("click",crearFormulario);
+
 
 //     ----   ----         Notificaciones de Toastify             ----   ----    //
 function eliminastePaciente(){
@@ -74,7 +80,7 @@ function eliminastePaciente(){
       }).showToast();
    
 }
-
+//     ----   ----         Notificaciones de Toastify             ----   ----    //
 function notificacionNuevoPaciente() {
    Toastify({
 
@@ -242,17 +248,18 @@ function spinnerOff (){
   let mostrarLista = document.getElementById("mostrarLista")
    // id que mostrara la informacion 
   let listaDePasientes = document.getElementById("listaDePasientes")
-
    mostrarLista.addEventListener("click",mostrarListaDePacientes)
 
-//funcion que muestra la lista de pacientes
+  //funcion que muestra la lista de pacientes
   // Atravez de la api JsonPaseholder , obtengo imagenes de usuarios 
 
 
 
-   function mostrarListaDePacientes() { 
+   function mostrarListaDePacientes () { 
 
       // Atravez de la aPi JsonPaseholder , obtengo imagenes de usuarios
+      // la razon por la que se encuentra aqui , es por que obtengo imagenes que simulan ser de usuarios, 
+      
 
       let pacientes = JSON.parse(localStorage.getItem("Pacientes"))
       pacientes = listaPacientes
@@ -284,8 +291,6 @@ function spinnerOff (){
          
             
             })
-
-
             .catch(error => {
             console.error('Error al cargar la imagen: ', error);
             });  

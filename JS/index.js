@@ -5,21 +5,29 @@ console.log(firebaseConfig);
 
 
 
+//btn de verificacion de Usuario
+let verificar = document.getElementById ("verificar")
+verificar.addEventListener("click",verificarUsuario) 
 
-let verificar = document.getElementById("verificar")
-verificar.addEventListener("click",verificarUsuario)
 
-let userId = document.getElementById("userid");
-let userPassword = document.getElementById("Userpassword");
 
+function  notificacionNuevoPaciente(){
+  swal({
+    text: "Verificado!!!",
+  });
+}
 
 function verificarUsuario (){
- 
+  
+  
+ let userId = document.getElementById("userid");
+ let userPassword = document.getElementById("userpassword");
+
+
   if (userId !== null) {
-    // Ahora puedes acceder a userId.value de manera segura
     console.log(userId.value)
     const userIdValue = userId.value;
-    // Resto de tu código
+   
   } else {
     console.log("Elemento 'userid' no encontrado en el DOM.");
   }
@@ -38,26 +46,24 @@ function verificarUsuario (){
         const email = data.Email;
         const password = data.Password;
         if ((nombre === (userId).value || email === (userId).value) && password === (userPassword).value ){
-          alert ("usuario verificado")
+         
+          alert
+          notificacionNuevoPaciente()
 
+          ingresoUsuario.className="Ingresoon";
 
+          
         }
   
-        // Haz lo que desees con los datos, como mostrarlos en pantalla
-      //  console.log(`Nombre: ${nombre}, Email: ${email}, Password: ${password}`);
+     
       });
     })
     .catch((error) => {
       console.error("Error al obtener datos: ", error);
     });
 
-  
     
 }
-
-
-
-
 
 
 
@@ -69,8 +75,10 @@ btn__CreateUser.addEventListener("click",MostrarCreateUser);
 
 
 function MostrarCreateUser(){
+  console.log("Botón 'Crear Usuario' clicado"); // Agrega esta línea de prueba
   formularioCreateUser.className="mostrar-createUser"
   login.className="ocultar__login-container"
+ 
 }
 
 // validacion de formulario de usuario
@@ -154,6 +162,7 @@ function guardarDatos (){
 
 
 // comentarios al azar de Supuestos usuarios de la aplicacion
+// al igual que en el formulario , desde este index.js accedo a los datos de JSONPlaseholder
 function getRandomComment() {
 
 const randomCommentId = Math.floor(Math.random() * 500);
@@ -183,6 +192,9 @@ fetch(url)
     console.error('Error al cargar los comentarios: ', error);
   });
 }
+
+
+
 getRandomComment();
 setInterval(getRandomComment, 5000);
 

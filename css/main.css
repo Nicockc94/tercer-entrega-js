@@ -36,6 +36,36 @@
 
  }
 
+ /*boton-ingreso*/
+.btn-verificar{
+margin-top: 20px;
+font-size: 20px;
+width: 100px;
+height: 40px;
+margin: 0 auto;
+margin-bottom: 20px;
+
+}
+
+/*Boton de ingreso*/
+
+.Ingresooff{
+display: none;
+}
+
+.Ingresoon{
+
+margin-top: 20px;
+font-size: 20px;
+width: 100px;
+height: 40px;
+margin: 0 auto;
+margin-bottom: 20px;
+}
+a:link{
+  
+}
+
  .btn-nav {
     width: 10em;
     position: relative;

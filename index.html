@@ -15,14 +15,14 @@
     <main class="login">
     <div id="login-container" class="mostrar__login-container">
         <p>Usuario<input id="userid" type="email" placeholder="Nombre de usuario o Email"></p>
-        <p>contraseña <input id ="Userpassword "type="password"></p>
-        <button id ="verificar">Verificar</a> </button>
-        <P>en caso de que no tengas una cuenta activa crea un usuario haciendo click aqui</P>
-        <button id ="btn-createUser"><a href="">crear usuario</a></button>
+        <p>contraseña <input id ="userpassword" type="password"></p>
+          <button class="btn-verificar" id ="verificar">Verificar</a> </button>
+        
+        <button class="Ingresooff" id ="ingresoUsuario"><a href="/pages/formulario.html">Ingresar</a></button>
     </div>
 
-    <button id ="ingresoUsuario"><a href="/pages/formulario.html"></a> Ingresar</button>
-
+    <P>en caso de que no tengas una cuenta activa crea un usuario haciendo click aqui</P>
+    <button id ="btn-createUser">crear usuario</button>
 
 
 
@@ -66,6 +66,8 @@
 <!--IMPORT SCRIPTS--->
 <script type="module" src="/JS/index.js"></script>
 <script type="module" src="/JS/firebase.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 
 </html>
