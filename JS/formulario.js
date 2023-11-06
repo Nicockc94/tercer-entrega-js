@@ -87,49 +87,61 @@ function notificacionNuevoPaciente() {
       
       }).showToast();
 }
+
+function  camposVacios(){
+   swal({
+     text: "COMPLETE TODOS LOS CAMPOS",
+   });
+ }
 /*-------------------------------------------------------------------------*/
 
 //funcion que crea el formulario
- function crearFormulario(e){
-  
-    //entrada de Valores 
-    let nombreCompleto = document.getElementById("nombreCompleto").value;
-    let dni = document.getElementById("dni").value;
-    let direccion = document.getElementById("direccion").value;
-    let fechaIngreso =document.getElementById("fechaIngreso").value;
-    let fechaNacimiento = document.getElementById("fechaNacimiento").value;
-    let elementosHigiene = document.getElementById("elementosHigiene").value;
-    let antecedentesSalud = document.getElementById("antecedentesSalud").value;
-    let medicacion = document.getElementById("medicacion").value;
-    let alergias = document.getElementById("alergias").value;
-    let observaciones = document.getElementById("observaciones").value;
-    let email = document.getElementById("email").value;
-    let telefono = document.getElementById("telefono").value;
-   
-    e.preventDefault()
-//Objeto Paciente
-    let paciente = {
-        nombreCompleto:nombreCompleto,
-        dni:dni ,
-        direccion:direccion,
-        fechaIngreso:fechaIngreso,
-        fechaNacimiento:fechaNacimiento,
-        elementosHigiene:elementosHigiene,
-        antecedentesSalud:antecedentesSalud,
-        medicacion:medicacion ,
-        alergias:alergias,
-        observaciones:observaciones ,
-        email:email,
-        telefono:telefono,
-     }
-//llamado a la funcion que crea un un nuevo paciente
-nuevoPaciente(paciente)
+function crearFormulario(e) {
+   e.preventDefault();
+ 
+   // Ahora el formulario comprueba que los campos tengan informacion para crear el Objeto Paciente 
+   // La funcion trim para eliminar los espacios indevidos 
+   if (
+     nombreCompleto.value.trim() === '' ||
+     dni.value.trim() === '' ||
+     direccion.value.trim() === '' ||
+     fechaIngreso.value.trim() === '' ||
+     fechaNacimiento.value.trim() === '' ||
+     elementosHigiene.value.trim() === '' ||
+     antecedentesSalud.value.trim() === '' ||
+     medicacion.value.trim() === '' ||
+     alergias.value.trim() === '' ||
+     observaciones.value.trim() === '' ||
+     email.value.trim() === '' ||
+     telefono.value.trim() === ''
+   ) {
+      camposVacios()
+     return; 
+   }
+ 
+   // se crea el objeto pacientes , si es que todos los formularios son cargados correctamente
+   let paciente = {
+     nombreCompleto: nombreCompleto.value,
+     dni: dni.value,
+     direccion: direccion.value,
+     fechaIngreso: fechaIngreso.value,
+     fechaNacimiento: fechaNacimiento.value,
+     elementosHigiene: elementosHigiene.value,
+     antecedentesSalud: antecedentesSalud.value,
+     medicacion: medicacion.value,
+     alergias: alergias.value,
+     observaciones: observaciones.value,
+     email: email.value,
+     telefono: telefono.value,
+   };
+ 
 
-setTimeout (reset,2000);
-setTimeout (notificacionNuevoPaciente,2000)
-spinnerOn ()   
+   nuevoPaciente(paciente);
+   setTimeout(reset, 2000);
+   setTimeout(notificacionNuevoPaciente, 2000);
+   spinnerOn();
  }
-
+ 
 // funcion que vacia el formulario despues de guardar los datos en storage
 function reset () {
 nombreCompleto.value = "";
@@ -242,9 +254,7 @@ function spinnerOff (){
    mostrarLista.addEventListener("click",mostrarListaDePacientes)
 
   //funcion que muestra la lista de pacientes
-  // Atravez de la api JsonPaseholder , obtengo imagenes de usuarios 
-
-
+  // A travez de la api JsonPaseholder , obtengo imagenes de usuarios 
 
    function mostrarListaDePacientes () { 
 
@@ -306,7 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
    let pacientes = JSON.parse(localStorage.getItem("Pacientes"));
    if (pacientes) {
      listaPacientes = pacientes;
-    
      mostrarListaDePacientes();
    }else{
 
