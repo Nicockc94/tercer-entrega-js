@@ -10,59 +10,60 @@ let verificar = document.getElementById ("verificar")
 verificar.addEventListener("click",verificarUsuario) 
 
 
-
-function  notificacionNuevoPaciente(){
+/*  -- -- -- -- Notificaciones de Verificado de Usuario -- -- -- -- */
+function  notificacionVerificado(){
   swal({
     text: "Verificado!!!",
   });
 }
 
-function verificarUsuario (){
-  
-  
- let userId = document.getElementById("userid");
- let userPassword = document.getElementById("userpassword");
 
+
+function  notificacionDenegado (){
+  swal({
+    text: "Acceso Denegado",
+  });
+}
+
+function verificarUsuario() {
+  let userId = document.getElementById("userid");
+  let userPassword = document.getElementById("userpassword");
+  let usuarioVerificado = false; // Variable para rastrear si se ha verificado el usuario
 
   if (userId !== null) {
-    console.log(userId.value)
     const userIdValue = userId.value;
-   
+    const userPasswordValue = userPassword.value;
+
+    const db = firebase.firestore();
+    const usersRef = db.collection("users");
+
+    usersRef.get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const nombre = data.Nombre;
+          const email = data.Email;
+          const password = data.Password;
+          
+          if ((nombre === userIdValue || email === userIdValue) && password === userPasswordValue) {
+            notificacionVerificado();
+            verificar.className = "btn-verificar_off";
+            ingresoUsuario.className = "Ingresoon";
+            usuarioVerificado = true; // esto termina de validar la autenticacion 
+          }
+        });
+
+        // Después del bucle, Si el usuario no fue validado / mostrara la notificacion de denegado
+        if (!usuarioVerificado) {
+          notificacionDenegado();
+        }
+      })
+      .catch((error) => {
+        console.error("Error al obtener datos: ", error);
+      });
   } else {
     console.log("Elemento 'userid' no encontrado en el DOM.");
   }
-
-
-  const db = firebase.firestore();
-  const usersRef = db.collection("users");
-  
-  
-    usersRef.get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        // Accede a los datos de cada documento
-        const data = doc.data();
-        const nombre = data.Nombre;
-        const email = data.Email;
-        const password = data.Password;
-        if ((nombre === (userId).value || email === (userId).value) && password === (userPassword).value ){
-         
-          alert
-          notificacionNuevoPaciente()
-
-          ingresoUsuario.className="Ingresoon";
-
-          
-        }
-  
-     
-      });
-    })
-    .catch((error) => {
-      console.error("Error al obtener datos: ", error);
-    });
-
-    
 }
 
 

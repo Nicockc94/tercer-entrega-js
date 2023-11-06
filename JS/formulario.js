@@ -1,7 +1,6 @@
 // llamado a los ID del html  : 
 
 
-
 let nombreCompleto = document.getElementById("nombreCompleto");
 let dni = document.getElementById("dni");
 let fechaIngreso =document.getElementById("fechaIngreso");
@@ -20,20 +19,20 @@ let spinner = document.getElementById("spinner");
 let busqueda = document.getElementById("busqueda");
 
 
-/* Botones */
+/* -- -- -- --Botones-- -- -- -- -- */
 let bton_ingresoPacientes = document.getElementById("btn-ingresoPacientes");
 let bton_busquedaPacientes =document.getElementById("btn-busquedaPacientes");
 let bton_cerrarFormulario = document.getElementById("cerrar")
 let bton_cerrarBusqueda = document.getElementById("boton-cerrar-busqueda");
 
 
-
+/* Asignamos funciones a los btn*/ 
 bton_ingresoPacientes.addEventListener("click",mostrarFormulario)
 bton_busquedaPacientes.addEventListener("click",mostrarBusqueda)
 bton_cerrarFormulario.addEventListener("click",cierraFormulario)
 bton_cerrarBusqueda.addEventListener("click", cerrarBusqueda)
 
-/*  Botones en HTML  */
+/* -- -- -- -- -- Botones en HTML -- -- -- -- --  */
 
 // funcion que cierra la Busqueda
 function cerrarBusqueda () {
@@ -46,7 +45,7 @@ function cierraFormulario (){
    formulario.className="formulariooff";
 
 }
-// funcion  que muestra el formulario
+// funcion  que muestra el formulario 
 function mostrarFormulario(){
    busqueda.className="Busquedaoff"
    formulario.className="formulario";
@@ -62,7 +61,7 @@ function mostrarBusqueda (){
 let listaPacientes=[]
 
 
-//envio de formulario
+//00000000000 creacion y envio de formulario 0000000000//
 submit.addEventListener("click",crearFormulario);
 
 //     ----   ----         Notificaciones de Toastify                  ----   ----    //
@@ -88,9 +87,7 @@ function notificacionNuevoPaciente() {
       
       }).showToast();
 }
-//     ----   ----         Notificaciones de Toastify                  ----   ----    //
-
-
+/*-------------------------------------------------------------------------*/
 
 //funcion que crea el formulario
  function crearFormulario(e){
@@ -110,15 +107,13 @@ function notificacionNuevoPaciente() {
     let telefono = document.getElementById("telefono").value;
    
     e.preventDefault()
-
+//Objeto Paciente
     let paciente = {
         nombreCompleto:nombreCompleto,
         dni:dni ,
         direccion:direccion,
-        //fechas =======> revisar documentacion para implementar datos tipo fechas
         fechaIngreso:fechaIngreso,
         fechaNacimiento:fechaNacimiento,
-        ////fechas =======> revisar documentacion para implementar datos tipo fechas
         elementosHigiene:elementosHigiene,
         antecedentesSalud:antecedentesSalud,
         medicacion:medicacion ,
@@ -162,7 +157,6 @@ function spinnerOff (){
    spinner.className="spinnerOff"
 }
 
-
  const nuevoPaciente = (paciente) => {
    listaPacientes.push(paciente)
    console.log (listaPacientes)
@@ -170,7 +164,7 @@ function spinnerOff (){
 
 }
 
-  // busqueda de pacientes mediante input // referencias a los ID del HTML
+ // busqueda de pacientes mediante input // referencias a los ID del HTML
  let buscaPaciente = document.getElementById("buscarPacientes")
  let pacienteaBuscar = document.getElementById("buscaPacientes")
  let ocultar = document.getElementById("ocultar")
@@ -194,9 +188,9 @@ function spinnerOff (){
          
          obser.className="MostrarObservaciones"
          obser.innerHTML=`              <h2>Datos de Paciente</h2> 
-                         <p><span class="key">Alergias: </span>${pacientes[index].alergias}</p>
-                         <p> <span class="key">Direccion: </span>${pacientes[index].direccion}</p> 
-                         <p> <span class="key">Telefono: </span> ${pacientes[index].telefono}</p>
+                         <p><span class="key">Alergias:</span>${pacientes[index].alergias}</p>
+                         <p> <span class="key">Direccion:</span>${pacientes[index].direccion}</p> 
+                         <p> <span class="key">Telefono:</span> ${pacientes[index].telefono}</p>
                          <p> <span class="key" >Email: </span> ${pacientes[index].email}</p> 
                                         <h2>Antecedentes de Salud</h2>
                                 <p>${pacientes[index].antecedentesSalud}</p>
@@ -254,7 +248,7 @@ function spinnerOff (){
 
    function mostrarListaDePacientes () { 
 
-      // Atravez de la aPi JsonPaseholder , obtengo imagenes de usuarios
+      // Atravez de la aPi JsonPlaseholder , obtengo imagenes de usuarios
       // la razon por la que se encuentra aqui , es por que obtengo imagenes que simulan ser de usuarios, 
       
 
@@ -270,8 +264,8 @@ function spinnerOff (){
          let fotos ='photos'
                                                        
          fetch (`${urlBase}/${fotos}/${index + 1}`)
-         .then(response => response.json())
-         .then(data =>{
+            .then(response => response.json())
+            .then(data =>{
          let imageUrl = data.url
 
             // creo un elemento en html
@@ -312,10 +306,14 @@ document.addEventListener("DOMContentLoaded", () => {
    let pacientes = JSON.parse(localStorage.getItem("Pacientes"));
    if (pacientes) {
      listaPacientes = pacientes;
-     // También puedes volver a cargar la lista de pacientes en la página al cargar
+    
      mostrarListaDePacientes();
+   }else{
+
+      console.log("Nose cargaron nuevos pacientes")
    }
- });
+ }
+ );
 
 
 

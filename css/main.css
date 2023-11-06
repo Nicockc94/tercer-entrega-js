@@ -47,6 +47,10 @@ margin-bottom: 20px;
 
 }
 
+.btn-verificar_off{
+  display:none;
+}
+
 /*Boton de ingreso*/
 
 .Ingresooff{
